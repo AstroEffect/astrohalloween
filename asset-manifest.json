@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/AstroEffect/astrohalloween/static/css/main.4876df6b.css",
+    "main.js": "/AstroEffect/astrohalloween/static/js/main.5dd8e0b9.js",
+    "static/media/lose5.mp4": "/AstroEffect/astrohalloween/static/media/lose5.be8da94967b5f4b854d7.mp4",
+    "static/media/lose4.mp4": "/AstroEffect/astrohalloween/static/media/lose4.7d689bba888a0d12a4e0.mp4",
+    "static/media/lose1.mp4": "/AstroEffect/astrohalloween/static/media/lose1.4f610a827c0f2d25c2db.mp4",
+    "static/media/lose7.mp4": "/AstroEffect/astrohalloween/static/media/lose7.c7817b6a035513e8877e.mp4",
+    "static/media/lose3.mp4": "/AstroEffect/astrohalloween/static/media/lose3.0453b36eaaa233d85b64.mp4",
+    "static/media/lose2.mp4": "/AstroEffect/astrohalloween/static/media/lose2.f8c2c4ee425855e37255.mp4",
+    "static/media/lose6.mp4": "/AstroEffect/astrohalloween/static/media/lose6.ae62ee5ab2dcbdb651ad.mp4",
+    "index.html": "/AstroEffect/astrohalloween/index.html",
+    "main.4876df6b.css.map": "/AstroEffect/astrohalloween/static/css/main.4876df6b.css.map",
+    "main.5dd8e0b9.js.map": "/AstroEffect/astrohalloween/static/js/main.5dd8e0b9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4876df6b.css",
+    "static/js/main.5dd8e0b9.js"
+  ]
+}
