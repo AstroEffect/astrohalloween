@@ -1,54 +1,57 @@
+// src/components/GuessPhase.jsx
 import React, { useEffect, useState } from "react";
-
-const API = "https://fairaddition-us.backendless.app/api/data/truthOrLie";
-
+import { ref, onValue, update } from "firebase/database";
+import { db } from "../firebase";
 
 export default function GuessPhase({ playerID, round, setPhase, setScore, setResult }) {
   const [opponentData, setOpponentData] = useState(null);
 
-
-  // Polling برای دریافت جمله بازیکن دیگر
   useEffect(() => {
-    const interval = setInterval(async () => {
-      const res = await fetch(`${API}?pageSize=2&sortBy=created%20desc`);
-      const data = await res.json();
-      // پیدا کردن جمله بازیکن دیگر که هنوز حدس زده نشده
-      const other = data.find(d => d.round === round && d.playerID !== playerID && !d.guessed);
-      if (other) setOpponentData(other);
-    }, 1000);
+    const dataRef = ref(db, "truthOrLie");
+    const unsubscribe = onValue(dataRef, (snapshot) => {
+      const data = snapshot.val();
+      if (!data) return;
 
+      const list = Object.entries(data).map(([key, value]) => ({
+        id: key,
+        ...value,
+      }));
 
-    return () => clearInterval(interval);
-  }, [playerID, round]);
+      const opponentSentence = list.find(
+        (d) => d.round === round && d.playerID !== playerID && !d.guessed
+      );
 
-
-  async function handleGuess(guessTruth) {
-    const correct = guessTruth === opponentData.isTruth;
-    setResult(correct ? "win" : "lose");
-    if (correct) setScore(prev => prev + 1);
-
-
-    await fetch(`${API}/${opponentData.objectId}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ guessed: true, correct, guessedBy: playerID }),
+      setOpponentData(opponentSentence || null);
     });
 
+    return () => unsubscribe();
+  }, [playerID, round]);
+
+  const handleGuess = async (guessTruth) => {
+    if (!opponentData) return;
+    const correct = guessTruth === opponentData.isTruth;
+
+    setResult(correct ? "win" : "lose");
+    if (correct) setScore((prev) => prev + 1);
+
+    await update(ref(db, `truthOrLie/${opponentData.id}`), {
+      guessed: true,
+      correct,
+      guessedBy: playerID,
+    });
 
     setPhase("result");
-  }
-
+  };
 
   if (!opponentData) return <p>در انتظار جمله بازیکن دیگر...</p>;
 
-
   return (
-    <div className="guess__container">
-      <h3 dir="rtl">حدس بزن جمله بازیکن دیگر واقعیه یا دروغ:</h3>
-      <h3>{opponentData.sentence}</h3>
-      <div className="guess__container__btns">
-        <button onClick={() => handleGuess(true)}>واقعیت 😇</button>
-        <button onClick={() => handleGuess(false)}>دروغ 😈</button>
+    <div className="phase guess-phase">
+      <h2 dir="rtl">حدس بزن جمله‌ی زیر دروغه یا واقعیت:</h2>
+      <p className="sentence">{opponentData.sentence}</p>
+      <div className="buttons">
+        <button onClick={() => handleGuess(true)}>😇 واقعیت</button>
+        <button onClick={() => handleGuess(false)}>😈 دروغ</button>
       </div>
     </div>
   );
