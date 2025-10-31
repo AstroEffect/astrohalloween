@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/astrohalloween/static/css/main.4876df6b.css",
-    "main.js": "/astrohalloween/static/js/main.ea226647.js",
+    "main.js": "/astrohalloween/static/js/main.aca3adc0.js",
     "static/media/lose5.mp4": "/astrohalloween/static/media/lose5.be8da94967b5f4b854d7.mp4",
     "static/media/lose4.mp4": "/astrohalloween/static/media/lose4.7d689bba888a0d12a4e0.mp4",
     "static/media/lose1.mp4": "/astrohalloween/static/media/lose1.4f610a827c0f2d25c2db.mp4",
@@ -11,10 +11,10 @@
     "static/media/lose6.mp4": "/astrohalloween/static/media/lose6.ae62ee5ab2dcbdb651ad.mp4",
     "index.html": "/astrohalloween/index.html",
     "main.4876df6b.css.map": "/astrohalloween/static/css/main.4876df6b.css.map",
-    "main.ea226647.js.map": "/astrohalloween/static/js/main.ea226647.js.map"
+    "main.aca3adc0.js.map": "/astrohalloween/static/js/main.aca3adc0.js.map"
   },
   "entrypoints": [
     "static/css/main.4876df6b.css",
-    "static/js/main.ea226647.js"
+    "static/js/main.aca3adc0.js"
   ]
 }
